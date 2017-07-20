@@ -1,0 +1,19 @@
+AMOBH工具箱使用说明：
+
+GUI使用，直接运行ThreeA.m进入GUI界面，
+压缩包附带提供了ZDT1,ZDT3,ZDT4,DLTZ2,DLTZ4,DLTZ5,DLTZ6(即为压缩包内DLTZ7)测试函数，
+使用参考：
+Objective function：@(x)DLTZ7(X)
+Number of vars：20（ZDT1和ZDT3的决策变量个数为30，ZDT4，DLTZ2，DLTZ4，DLTZ5的决策变量个数10，DLTZ7的决策变量个数为20）
+Number of objs：3（ZDT系列为双目标，DLTZ系列为3目标）
+Vars bound：选择导入文件DLTZ7.mat（各个函数均有对应的边界文件，ZDT1和ZDT3对应于ZDT13.mat，ZDT4对应于ZDT4.mat，DLTZ2，DLTZ4，DLTZ5对应于DLTZ245.mat）
+Archive Size：推荐50
+Max generation：推荐500-1000内的数，缺省为600
+Star population：推荐200-300内的数，缺省为300
+Max learning rate：推荐0.3，ZDT4的优化推荐0.5-0.6
+Min learning rate：推荐0.1
+
+设置好后点击START开始优化，待右边动态过程停止后，点击Ploting绘制图形，点击Export results导出结果保存，分别名为ApproximateParetoSolutionSet和ApproximateParetoFront，表示求解得到的近似Pareto最优解集和求解得到的近似Pareto前端。缺省格式为保存成xls，支持保存为.mat和xlsx。
+
+关于p函数接口调用可以参考报告中的实例，这里不再赘述。
+
