@@ -51,7 +51,7 @@ gArchive = [];
 
 
 
-%% ³õÊ¼»¯±ß½ç
+%% åˆå§‹åŒ–è¾¹ç•Œ
 if N == 1
     starmax(1) = starminmax(1,1);
     starmin(1) = starminmax(1,2);
@@ -64,7 +64,7 @@ end
 
 solution_vector = [];
 gArchive = [];
-%%³õÊ¼»¯ÖÖÈº
+%%åˆå§‹åŒ–ç§ç¾¤
 for i=1:bh_option.sizestar
     
     if N ~=1
@@ -80,7 +80,7 @@ for i=1:bh_option.sizestar
     
 end
 p = [];
-% ³õÊ¼»¯Pareto½â
+% åˆå§‹åŒ–Paretoè§£
 for i = 1:M
     [p(i),q] = find(solution_vector(:,i) == min(solution_vector(:,i)));
 end
@@ -186,7 +186,7 @@ end
 
 
 
-%% µü´úÑ°ÓÅ
+%% è¿­ä»£å¯»ä¼˜
 for i = 1:bh_option.maxgen
     
     
@@ -258,11 +258,11 @@ for i = 1:bh_option.maxgen
         %         end
         
         
-        %ÅĞ¶ÏÊÇ·ñĞÂ½â½øÈëÍâ²¿ÎÄµµ
+        %åˆ¤æ–­æ˜¯å¦æ–°è§£è¿›å…¥å¤–éƒ¨æ–‡æ¡£
         count = 0;
         for t = 1:n
-            %ĞÂ½âÓÅÓÚ¾É½â£¬½øÈë²¢Ìæ´ú
-            if all(solution_vector(j,:) <= gArchive(t,1:M))&&any(solution_vector(j,:) < gArchive(t,1:M)) && count == 0 %Õ¼ÓÅ¾É½â
+            %æ–°è§£ä¼˜äºæ—§è§£ï¼Œè¿›å…¥å¹¶æ›¿ä»£
+            if all(solution_vector(j,:) <= gArchive(t,1:M))&&any(solution_vector(j,:) < gArchive(t,1:M)) && count == 0 %å ä¼˜æ—§è§£
                 gArchive(t,:) = [solution_vector(j,:),star(j,:)];
                 count = 1;
             elseif all(solution_vector(j,:) <= gArchive(t,1:M))&&any(solution_vector(j,:) < gArchive(t,1:M))&& count ~= 0
@@ -278,13 +278,13 @@ for i = 1:bh_option.maxgen
        
         if count == 0  %Non-dominant
             if n < K
-                 %»¥Îª·ÇÕ¼ÓÅ£¬²¢ÇÒÎÄµµÎ´Âú£¬Ö±½Ó½øÈëÎÄµµ
+                 %äº’ä¸ºéå ä¼˜ï¼Œå¹¶ä¸”æ–‡æ¡£æœªæ»¡ï¼Œç›´æ¥è¿›å…¥æ–‡æ¡£
                 if all(sum(repmat(solution_vector(j,:),size(gArchive,1),1) >= gArchive(:,1:M),2) < M)
                     gArchive(n + 1,:) = [solution_vector(j,:),star(j,:)];
                 end
             else
                 if all(sum(repmat(solution_vector(j,:),size(gArchive,1),1) >= gArchive(:,1:M),2) < M)
-                    %»¥Îª·ÇÕ¼ÓÅ£¬ÎÄµµÒÑÂú£¬ÅĞ¶ÏÃÜ¶È
+                    %äº’ä¸ºéå ä¼˜ï¼Œæ–‡æ¡£å·²æ»¡ï¼Œåˆ¤æ–­å¯†åº¦
                     flag = 0;
                     den = zeros(1,n + 1);
                     dis = zeros(1,n + 1);
@@ -299,7 +299,7 @@ for i = 1:bh_option.maxgen
                     end
                     l_label = find(L_temp==0);
                     L_temp(l_label) = 1;
-                    %¼ÆËãÃÜ¶È
+                    %è®¡ç®—å¯†åº¦
                     for t = 1:n+1
                         
                         den(t) = sum(sum(repmat(L_temp(t,:),size(L_temp,1),1) == L_temp));
@@ -310,7 +310,7 @@ for i = 1:bh_option.maxgen
                     
                     
                     c = find(den == max(den));
-                    %ÈôÃÜ¶ÈĞ¡ÓÚ×î´óÃÜ¶È£¬½øÈëÎÄµµ
+                    %è‹¥å¯†åº¦å°äºæœ€å¤§å¯†åº¦ï¼Œè¿›å…¥æ–‡æ¡£
                     select = c(randperm(length(c),1));
                     if den(end) < den(select)
                         gArchive(select,:) = [solution_vector(j,:),star(j,:)];
@@ -424,7 +424,7 @@ for i = 1:bh_option.maxgen
         
     end
     
-    %×´Ì¬ÊÕÁ²Ê±
+    %çŠ¶æ€æ”¶æ•›æ—¶
     if(strcmp(status,'convergence'))
         
         
@@ -457,7 +457,7 @@ for i = 1:bh_option.maxgen
         
         
     end
-    %×´Ì¬¶àÑùÊ±
+    %çŠ¶æ€å¤šæ ·æ—¶
     if(strcmp(status,'diversity'))
         ELS = ELS - step_x*abs(delta_Entropy(i));
         sc = [];
@@ -489,7 +489,7 @@ for i = 1:bh_option.maxgen
 
         
     end
-    %×´Ì¬Í£ÖÍÊ±
+    %çŠ¶æ€åœæ»æ—¶
     if(strcmp(status,'stagnation'))
         ELS = ELS + 2*step_x*abs(1 + delta_Entropy(i));
         sc = [];
@@ -524,7 +524,7 @@ for i = 1:bh_option.maxgen
     
     v = size(gbest_all,1);
     R = [];
-    %¼ÆËãºÚ¶´°ë¾¶
+    %è®¡ç®—é»‘æ´åŠå¾„
     if v == 1
         R = abs(gbest_all(v,1:M)./(sum(solution_vector)));
     else
@@ -532,12 +532,12 @@ for i = 1:bh_option.maxgen
             R = [R;abs(gbest_all(j,1:M)./sum(solution_vector))];
         end
     end
-    % ÅĞ¶ÏÊÇ·ñ½øÈëºÚ¶´±ß½ç
+    % åˆ¤æ–­æ˜¯å¦è¿›å…¥é»‘æ´è¾¹ç•Œ
     for j = 1:bh_option.sizestar
         %         S = min(abs(solution_vector(j,:) - gbest(1,1:M)));
         if v == 1;
            
-            if any(sum(abs(repmat(solution_vector(j,:),size(gbest_all,1),1) - gbest_all(:,1:M)) > R,2) ==0) %½øÈëÎüÊÕ±ß½ç:ÎüÊÕ²¢ÖØĞÂÉú³É
+            if any(sum(abs(repmat(solution_vector(j,:),size(gbest_all,1),1) - gbest_all(:,1:M)) > R,2) ==0) %è¿›å…¥å¸æ”¶è¾¹ç•Œ:å¸æ”¶å¹¶é‡æ–°ç”Ÿæˆ
                 if N == 1
                     star(j,1) = (starmax(1) - starmin(1)) * rand + starmin(1);
                 else
@@ -547,9 +547,9 @@ for i = 1:bh_option.maxgen
                 
             end
         else
-            for  t = 1:v
+
                 
-                if any(sum(abs(repmat(solution_vector(j,:),size(gbest_all,1),1) - gbest_all(:,1:M)) > R,2) ==0) %½øÈëÎüÊÕ±ß½ç:ÎüÊÕ²¢ÖØĞÂÉú³É
+                if any(sum(abs(repmat(solution_vector(j,:),size(gbest_all,1),1) - gbest_all(:,1:M)) > R,2) ==0) %è¿›å…¥å¸æ”¶è¾¹ç•Œ:å¸æ”¶å¹¶é‡æ–°ç”Ÿæˆ
                     if N == 1
                         star(j,1) = (starmax(1) - starmin(1)) * rand + starmin(1);
                     else
@@ -560,7 +560,7 @@ for i = 1:bh_option.maxgen
                     end
                     
                 end
-            end
+
             
         end
     end
