@@ -343,14 +343,20 @@ for i = 1:bh_option.maxgen
                 min(gArchive(:,j))));
             
             
-            
-            x1 = [x1 ; j - 0.7 + rand(size(L,1),1)*0.5];
-            y1 = [y1 ; L(:,j) - 0.7 + 0.5* rand(size(L,1),1)];
-            
+
             
         end
         l_label1 = find(L==0);
         L(l_label1) = 1;
+        
+        for j = 1:M
+
+            x1 = [x1 ; j - 0.7 + rand(size(L,1),1)*0.5];
+            y1 = [y1 ; L(:,j) - 0.7 + 0.5* rand(size(L,1),1)];
+            
+            
+        end        
+        
         
     else
         L = [];
